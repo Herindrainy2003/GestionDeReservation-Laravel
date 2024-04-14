@@ -15,6 +15,7 @@ class Reservation extends Model
         'place',
         'date_reservation',
         'date_voyage',
+        'destination',
         'paiement',
         'montant_avance',
     ];
@@ -30,4 +31,5 @@ class Reservation extends Model
      {
          return $this->belongsTo(Client::class, 'idclient');
      }
+
 }

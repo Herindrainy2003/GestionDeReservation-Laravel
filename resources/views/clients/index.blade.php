@@ -5,6 +5,7 @@
     <div class="container">
         <h2>Liste des Clients</h2>
         <a href="{{ route('clients.create') }}" class="btn btn-primary mb-3">Ajouter un Client</a>
+       
         <table class="table">
             <thead>
                 <tr>
@@ -15,6 +16,9 @@
                 </tr>
             </thead>
             <tbody>
+                @if ($clients->isEmpty())
+                <p>Aucun résultat trouvé pour votre recherche.</p>
+                @endif
                 @foreach ($clients as $client)
                     <tr>
                         <td>{{ $client->id }}</td>

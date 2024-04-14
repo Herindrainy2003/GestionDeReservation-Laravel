@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Place;
+use App\Models\Voitures;
 
 class PlaceController extends Controller
 {
@@ -20,12 +21,14 @@ class PlaceController extends Controller
 
     public function create()
     {
-        return view('places.create');
+        $voitures = Voitures::all();
+        return view('places.create' , compact('voitures'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
+            'idvoiture' => 'required | exists:voitures,id',
             'place' => 'required|integer',
             'occupation' => 'required|in:oui,non',
         ]);

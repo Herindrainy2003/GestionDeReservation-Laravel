@@ -15,6 +15,9 @@
                 <p class="card-text">Paiement: {{ $reservation->paiement }}</p>
                 <p class="card-text">Montant Avance: {{ $reservation->montant_avance }}</p>
             </div>
+            <button class="btn btn-primary btn-sm" onclick="printClientsByDate()">Imprimer</button>
         </div>
     </div>
 @endsection
+
+

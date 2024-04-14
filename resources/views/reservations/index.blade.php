@@ -15,6 +15,7 @@
                     <th scope="col">Date Réservation</th>
                     <th scope="col">Date Voyage</th>
                     <th scope="col">Paiement</th>
+                    <th scope="col">Destination</th>
                     <th scope="col">Montant Avance</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -29,6 +30,7 @@
                         <td>{{ $reservation->date_reservation }}</td>
                         <td>{{ $reservation->date_voyage }}</td>
                         <td>{{ $reservation->paiement }}</td>
+                        <td>{{ $reservation->destination }}</td>
                         <td>{{ $reservation->montant_avance }}</td>
                         <td>
                             <a href="{{ route('reservations.show', $reservation->id) }}" class="btn btn-info btn-sm">Voir</a>
@@ -38,6 +40,7 @@
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?')">Supprimer</button>
                             </form>
+                            <a href="{{ route('reservations.receipt', $reservation->id) }}" class="btn btn-success btn-sm">Imprimer</a>
                         </td>
                     </tr>
                 @endforeach

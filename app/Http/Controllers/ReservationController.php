@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Reservation;
 use App\Models\Voitures;
 use App\Models\Client;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class ReservationController extends Controller
 {
@@ -30,6 +32,7 @@ class ReservationController extends Controller
             'place' => 'required|integer',
             'date_reservation' => 'required|date',
             'date_voyage' => 'required|date',
+            'destination' => 'required|in:Tananarivo,Andranomafana,Antsirabe',
             'paiement' => 'required|in:sans avance,avec avance,tout payé',
             'montant_avance' => 'nullable|integer',
         ]);
@@ -60,6 +63,7 @@ class ReservationController extends Controller
             'place' => 'required|integer',
             'date_reservation' => 'required|date',
             'date_voyage' => 'required|date',
+            'destination' => 'required|in:Tananarivo,Andranomafana,Antsirabe',
             'paiement' => 'required|in:sans avance,avec avance,tout payé',
             'montant_avance' => 'nullable|integer',
         ]);
@@ -75,4 +79,28 @@ class ReservationController extends Controller
         return redirect()->route('reservations.index')
             ->with('success', 'Reservation deleted successfully');
     }
+
+    public function downloadReceipt($id)
+{
+    $reservation = Reservation::find($id);
+
+    // Générer le contenu HTML de la vue receipt.blade.php
+    $html = view('recu', compact('reservation'))->render();
+
+    // Configuration de Dompdf
+    $options = new Options();
+    $options->set('defaultFont', 'Arial');
+
+    // Création de l'instance Dompdf
+    $dompdf = new Dompdf($options);
+
+    // Chargement du contenu HTML
+    $dompdf->loadHtml($html);
+
+    // Rendu du PDF
+    $dompdf->render();
+
+    // Téléchargement du fichier PDF
+    return $dompdf->stream('receipt.pdf');
+}
 }

@@ -43,6 +43,14 @@
                 </select>
             </div>
             <div class="mb-3">
+                <label for="destination" class="form-label">Destination:</label>
+                <select id="destination" name="destination" class="form-select" required>
+                    <option value="Tananarivo">Tananarivo</option>
+                    <option value="Andranomafana">Andranomafana</option>
+                    <option value="Antsirabe">Antsirabe</option>
+                </select>
+            </div>
+            <div class="mb-3">
                 <label for="montant_avance" class="form-label">Montant Avance:</label>
                 <input type="number" id="montant_avance" name="montant_avance" class="form-control">
             </div>
